@@ -14,29 +14,43 @@ namespace TP_Web_Promo_WEB
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void btnValidar_Click(object sender, EventArgs e)
         {
-            // Acá podés validar  el código ingresado
-
-            VaucherNegocio ListaVauchers = new VaucherNegocio();
-            bool validacion= false;
-
-            for (int x=0; x< ListaVauchers.lista().Count; x++)
+            Image1.Style["opacity"]="1"; 
+            try
             {
-                if(ListaVauchers.lista()[x].Codigo== txtBoxVoucher.Text)
-                {
-                    Response.Redirect("ListadoProducto.aspx",false);
-                    validacion = true;
-                    Session.Add("CodVaucher",ListaVauchers.lista()[x].Codigo);
-                    Session.Add("IdCliente", ListaVauchers.lista()[x].IdCliente);
-                }
-            }
-            if (!validacion) lblMensaje.Text ="Vaucher inexistente";
+                VaucherNegocio ListaVauchers = new VaucherNegocio();
+                bool validacion = false;
 
-            // Luego redirigís a la página ListadoProducto.aspx
+                foreach(var item in ListaVauchers.lista())
+                {
+                    if (item.Codigo == txtBoxVoucher.Text)
+                    {
+                        validacion = true;
+                        Session.Add("CodVaucher", item.Codigo);
+                        Session.Add("IdCliente", item.IdCliente);
+                        Response.Redirect("ListadoProducto.aspx", false);
+                    }
+                }
+                Image1.Style["opacity"] = "0";
+                if (!validacion) lblMensaje.Text = "Vaucher inexistente";
+            }
+            catch (Exception ex)
+            {
+                //---------- Es para sacar un mensaje Alert() de html -----------------------
+                //string Alerta = "alert('Hubo un error inesperado. Vuelva a intentar mas tarde.');";
+                //ClientScript.RegisterStartupScript(this.GetType(), "MensajeAlerta", Alerta, true);
+
+                Image1.Style["opacity"] = "0";
+                lblMensaje.Text = "alert('Hubo un error inesperado. Vuelva a intentar mas tarde.');";
+
+                //throw ex;
+            }
+
+
 
         }
 
