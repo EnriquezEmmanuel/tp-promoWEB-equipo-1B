@@ -12,9 +12,13 @@
                 <h2 id="txtBoxIngresarVoucher">Ingrese el voucher</h2>
                 <hr />
                 <div>
-                    <asp:TextBox ID="txtBoxVoucher" runat="server" CssClass="tamanioTxt"></asp:TextBox>
+                    <asp:Label Text="Ingresar código" runat="server" />
+                    <asp:TextBox ID="txtBoxVoucher" runat="server" CssClass="tamanioTxt" OnTextChanged="btnValidar_Click"></asp:TextBox>
                     <br />
                     <asp:Button ID="btnValidar" runat="server" Text="Validar" CssClass="btn btn-primary" OnClick="btnValidar_Click"/>
+                    <div>
+                        <asp:Label ID="lblMensaje" CssClass="mje" runat="server" Text=""></asp:Label>
+                    </div>
                     
                 </div>
             </section>

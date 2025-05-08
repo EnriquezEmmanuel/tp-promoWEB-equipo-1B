@@ -22,6 +22,10 @@ namespace TP_Web_Promo_WEB
                 rptArticulos.DataSource = ListaArticulos;
                 rptArticulos.DataBind();
             }
+            if (Session["CodVaucher"] != null)
+            {
+                Temporal.Text = Session["IdCliente"].ToString()+" => Esto es para verificar que pasan las variables.";
+            }
         }
 
         private void CargarArticulosConImagenes()

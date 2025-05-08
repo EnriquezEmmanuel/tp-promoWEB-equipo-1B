@@ -3,6 +3,15 @@
     height: 40px;
     font-size: 16px;
     padding: 10px;
+    /*
     display: block;
-    margin: 0 auto; /* ← Esto lo centra horizontalmente */
+    margin: 0 auto; 
+    */
+    margin-bottom:1em;
+}
+.btn-primary {
+    margin-bottom: 1em;
+}
+.mje{
+    color: orangered;
 }
