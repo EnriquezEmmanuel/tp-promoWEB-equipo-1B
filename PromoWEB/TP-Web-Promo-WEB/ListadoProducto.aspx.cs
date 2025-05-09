@@ -71,7 +71,7 @@ namespace TP_Web_Promo_WEB
             // Selecionar el articulo, restarlo en la base de datos
 
             // Luego redirigís a la página pedirle los datos al cliente
-            //Response.Redirect("", false);
+            Response.Redirect("FormularioCliente.aspx", false);
         }
     }
 }
