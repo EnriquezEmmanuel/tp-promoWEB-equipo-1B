@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row g-3 needs-validation" novalidate runat="server">
 
+        <h2>Ingresá tus datos</h2>
+        <hr />
         <div class="col-12">
             <label for="txtDocumento" class="form-label">DNI</label>
             <asp:TextBox runat="server" ID="txtDocumento" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtDocumento_TextChanged" />

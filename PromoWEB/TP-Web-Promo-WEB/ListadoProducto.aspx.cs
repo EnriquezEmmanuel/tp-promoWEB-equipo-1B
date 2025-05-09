@@ -24,7 +24,7 @@ namespace TP_Web_Promo_WEB
             }
             if (Session["CodVaucher"] != null)
             {
-                Temporal.Text = Session["FechaCanje"].ToString()+" => Esto es para verificar que pasan las variables.";
+                Temporal.Text = Session["FechaCanje"].ToString() + " => Esto es para verificar que pasan las variables.";
             }
         }
 
