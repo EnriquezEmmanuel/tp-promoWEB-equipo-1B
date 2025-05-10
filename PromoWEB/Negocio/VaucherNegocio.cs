@@ -25,17 +25,17 @@ namespace Negocio
                 {
                     Vaucher aux = new Vaucher();
                     aux.Codigo = (string)datos.Lector["CodigoVoucher"];
-                    if (datos.Lector["IdCliente"] is null)
-                    {
-                        aux.IdCliente = (int)datos.Lector["IdCliente"];
-                        aux.FechaCanje = (DateTime)datos.Lector["FechaCanje"];
-                        aux.IdArticulo = (int)datos.Lector["IdArticulo"];
-                    }
-                    else
+                    if (datos.Lector["IdCliente"] == DBNull.Value)
                     {
                         aux.IdCliente = 0;
                         aux.IdArticulo = 0;
                         aux.FechaCanje = DateTime.Today;
+                    }
+                    else
+                    {
+                        aux.IdCliente = (int)datos.Lector["IdCliente"];
+                        aux.FechaCanje = (DateTime)datos.Lector["FechaCanje"];
+                        aux.IdArticulo = (int)datos.Lector["IdArticulo"];
                         /*
 						Cuando se decida devolver a la base el dato de la fecha debemos formatear lo así
 						fechaSinLaHora.ToString("dd/MM/yyyy");

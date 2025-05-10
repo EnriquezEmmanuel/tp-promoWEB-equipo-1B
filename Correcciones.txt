@@ -1,0 +1,9 @@
+Si sale es error:
+	"No se puede encontrar una parte de la ruta de acceso 'H:\DOCUMENTOS\PROGRAMACION\REPO-GITHUB\Tp4- 
+promo web\tp-promoWEB-equipo-1B\PromoWEB\TP-Web-Promo-WEB\roslyn\csc.exe'."
+
+- Borrar la carpeta bin y obj de la dirección: 
+	PromoWEB\TP-Web-Promo-WEB
+
+- Cerrar el VSC y abrirlo nuevamente 
+- Abrir la solución pulsar Ctrl + Shift + B para reconstruir el proyecto

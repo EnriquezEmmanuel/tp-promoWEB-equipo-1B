@@ -22,9 +22,20 @@ namespace TP_Web_Promo_WEB
                 rptArticulos.DataSource = ListaArticulos;
                 rptArticulos.DataBind();
             }
-            if (Session["CodVaucher"] != null)
+            if (Session["Vaucher"] != null)
             {
-                Temporal.Text = Session["FechaCanje"].ToString() + " => Esto es para verificar que pasan las variables.";
+                try
+                {
+                    Vaucher vaucherInactivo = new Vaucher();
+                    vaucherInactivo = (Vaucher)Session["Vaucher"];
+                    Temporal.Text = vaucherInactivo.Codigo + " => Esto es para verificar que el objeto Vaucher."; //datos numericos pasarlos con .ToString()
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
             }
         }
 

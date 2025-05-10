@@ -21,54 +21,40 @@ namespace TP_Web_Promo_WEB
         {
 
             Image1.Style["opacity"] = "1";
-
-            VaucherNegocio ListaVauchers = new VaucherNegocio();
-            bool validacion = false;
-
-            foreach (Vaucher item in ListaVauchers.lista())
-            {
-                if (item.Codigo == txtBoxVoucher.Text)
-                {
-                    validacion = true;
-                    Session.Add("CodVaucher", item.Codigo);
-                    Session.Add("FechaCanje", item.FechaCanje);
-                    Response.Redirect("ListadoProducto.aspx", false);
-                }
-            }
-            Image1.Style["opacity"] = "0";
-            if (!validacion) lblMensaje.Text = "Vaucher inexistente";
-
-            /*
-            Image1.Style["opacity"]="1"; 
             try
             {
                 VaucherNegocio ListaVauchers = new VaucherNegocio();
                 bool validacion = false;
+                string mensaje = "";
 
-                foreach(Vaucher item in ListaVauchers.lista())
+                foreach (Vaucher item in ListaVauchers.lista())
                 {
                     if (item.Codigo == txtBoxVoucher.Text)
                     {
-                        validacion = true;
-                        Session.Add("CodVaucher", item.Codigo);
-                        Response.Redirect("ListadoProducto.aspx", false);
+                        if (item.IdCliente == 0)
+                        {
+                            validacion = true;
+
+                            Session.Add("Vaucher", item);
+
+                            Response.Redirect("ListadoProducto.aspx", false);
+                        }
+                        else
+                        {
+                            validacion = true;
+                            mensaje = "El Vaucher ya ha sido utilizado.";
+                        }
                     }
                 }
+
                 Image1.Style["opacity"] = "0";
-                if (!validacion) lblMensaje.Text = "Vaucher inexistente";
+                if (validacion == true) lblMensaje.Text = mensaje; else lblMensaje.Text = "Vaucher inexistente";
             }
             catch (Exception ex)
             {
-                //---------- Es para sacar un mensaje Alert() de html -----------------------
-                //string Alerta = "alert('Hubo un error inesperado. Vuelva a intentar mas tarde.');";
-                //ClientScript.RegisterStartupScript(this.GetType(), "MensajeAlerta", Alerta, true);
-
                 Image1.Style["opacity"] = "0";
-                lblMensaje.Text = "Hubo un error inesperado. Vuelva a intentar mas tarde.";
-
-                throw ex;
+                lblMensaje.Text = "Hubo un error inesperado. Vuelva a intentar más tarde.";
             }
-            */
 
 
         }
