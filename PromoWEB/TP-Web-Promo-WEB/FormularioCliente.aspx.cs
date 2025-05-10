@@ -19,29 +19,35 @@ namespace TP_Web_Promo_WEB
 
         protected void btnParticipar_Click(object sender, EventArgs e)
         {
-            
-            ClienteNegocio negocio = new ClienteNegocio();
-            var existente = negocio.buscarPorDNI(txtDocumento.Text);
-            
-
-            if ( existente != null )
+          
+            if (Page.IsValid)
             {
+                ClienteNegocio negocio = new ClienteNegocio();
+                var existente = negocio.buscarPorDNI(txtDocumento.Text);
+
+
+                if (existente != null)
+                {
+                    Response.Redirect("RegistroExitoso");
+                    return;
+                }
+
+                cliente c = new cliente();
+
+                c.Documento = txtDocumento.Text;
+                c.Nombre = txtNombre.Text;
+                c.Apellido = txtApellido.Text;
+                c.Email = txtEmail.Text;
+                c.Direccion = txtDireccion.Text;
+                c.Ciudad = txtCiudad.Text;
+                c.CodPostal = int.Parse(txtCodPostal.Text);
+
+                negocio.agregar(c);
                 Response.Redirect("RegistroExitoso");
-                return;
             }
-                
-            cliente c = new cliente();
 
-            c.Documento = txtDocumento.Text;
-            c.Nombre = txtNombre.Text;
-            c.Apellido = txtApellido.Text;
-            c.Email = txtEmail.Text;
-            c.Direccion = txtDireccion.Text;
-            c.Ciudad = txtCiudad.Text;
-            c.CodPostal = int.Parse(txtCodPostal.Text);
 
-            negocio.agregar(c);
-            Response.Redirect("RegistroExitoso");
+
         }
 
         protected void txtDocumento_TextChanged(object sender, EventArgs e)

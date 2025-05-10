@@ -11,35 +11,35 @@ namespace Negocio
     {
         public List<Marca> listar()
         {
-			List<Marca> lista= new List<Marca>();
-			AccesoDatos datos = new AccesoDatos();
-			try
-			{
-				datos.setearConsulta("select M.Id, M.Descripcion from MARCAS M");
-				datos.ejecutarLectura();
+            List<Marca> lista = new List<Marca>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select M.Id, M.Descripcion from MARCAS M");
+                datos.ejecutarLectura();
 
-				while (datos.Lector.Read())
-				{
-					Marca aux = new Marca();
+                while (datos.Lector.Read())
+                {
+                    Marca aux = new Marca();
 
-					aux.Id = (int)datos.Lector["Id"];
-					aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
 
-					lista.Add(aux);
+                    lista.Add(aux);
 
-				}
+                }
 
-				return lista;
-			}
-			catch (Exception ex)
-			{
+                return lista;
+            }
+            catch (Exception ex)
+            {
 
-				throw ex;
-			}
-			finally
-			{
-				datos.cerrarConexion();
-			}
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }
