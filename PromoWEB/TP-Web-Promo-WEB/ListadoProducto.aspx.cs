@@ -13,6 +13,7 @@ namespace TP_Web_Promo_WEB
     public partial class ListadoProducto : System.Web.UI.Page
     {
         public List<Articulo> ListaArticulos { get; set; }
+        private Vaucher vaucherInactivo { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,18 +25,10 @@ namespace TP_Web_Promo_WEB
             }
             if (Session["Vaucher"] != null)
             {
-                try
-                {
-                    Vaucher vaucherInactivo = new Vaucher();
-                    vaucherInactivo = (Vaucher)Session["Vaucher"];
-                    Temporal.Text = vaucherInactivo.Codigo + " => Esto es para verificar que el objeto Vaucher."; //datos numericos pasarlos con .ToString()
-                }
-                catch (Exception ex)
-                {
+                vaucherInactivo = new Vaucher();
+                vaucherInactivo = (Vaucher)Session["Vaucher"];
 
-                    throw ex;
-                }
-
+                //Temporal.Text = vaucherInactivo.Codigo + " => Esto es para verificar que el objeto Vaucher."; //datos numericos pasarlos con .ToString()
             }
         }
 
@@ -83,10 +76,15 @@ namespace TP_Web_Promo_WEB
 
         protected void BtnSelecionar_Click(object sender, EventArgs e)
         {
-            // Selecionar el articulo, restarlo en la base de datos
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                string argumento = btn.CommandArgument;
+                Temporal.Text = argumento;
+                vaucherInactivo.IdArticulo = int.Parse(argumento);
 
-            // Luego redirigís a la página pedirle los datos al cliente
-            Response.Redirect("FormularioCliente.aspx", false);
+                Response.Redirect("FormularioCliente.aspx", false);
+            }
         }
     }
 }

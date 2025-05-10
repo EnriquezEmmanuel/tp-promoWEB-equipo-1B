@@ -13,7 +13,12 @@ namespace TP_Web_Promo_WEB
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Vaucher vaucherInactivo = new Vaucher();
+                vaucherInactivo = (Vaucher)Session["Vaucher"];
+                txtDocumento.Text = "Se cargo el vaucher: " + vaucherInactivo.Codigo + " y el producto del vaucher: " + vaucherInactivo.IdArticulo; //datos numericos pasarlos con .ToString()
+            }
         }
 
 

@@ -36,7 +36,7 @@
                             <p><strong>Marca:</strong> <%# Eval("Marca") %></p>
                             <p><strong>Categoría:</strong> <%# Eval("Categoria") %></p>
                             <p><strong>Precio:</strong> $<%# Eval("Precio", "{0:F2}") %></p>
-                            <asp:Button class="btn btn-primary" ID="BtnSelecionar" runat="server" OnClick="BtnSelecionar_Click" Text="Selecionar" />
+                            <asp:Button class="btn btn-primary" ID="BtnSelecionar" runat="server" OnClick="BtnSelecionar_Click" Text="Selecionar" CommandArgument='<%# Eval("Id") %>'/>
                         </div>
                     </div>
                 </div>
