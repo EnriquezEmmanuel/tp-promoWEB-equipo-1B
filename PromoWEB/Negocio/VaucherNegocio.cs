@@ -58,6 +58,31 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void registrarVoucher(Vaucher nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
 
+            try
+            {
+                datos.setearConsulta("UPDATE Vouchers SET IdCliente= @IdCliente, FechaCanje= @FechaCanje, IdArticulo= @IdArticulo WHERE CodigoVoucher=@CodigoVoucher");
+                datos.setearParametro("@CodigoVoucher", nuevo.Codigo);
+                datos.setearParametro("@IdCliente", nuevo.IdCliente);
+                datos.setearParametro("@IdArticulo", nuevo.IdArticulo);
+                string fecha = nuevo.FechaCanje.ToString("yyyy/MM/dd");
+                datos.setearParametro("@FechaCanje", fecha);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
+
 }

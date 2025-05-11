@@ -114,6 +114,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Personalizar.css" />
     <Content Include="Content\PersonalizarDefault.css" />
+    <Content Include="Content\RegistroExitoso.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />

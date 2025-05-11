@@ -65,6 +65,10 @@
         </div>
     </div>
 
+
+
+    <%--  %><asp:Label Text="-- Sin cambios --" ID="verificador" runat="server" /> --%>
+
     <!-- Script con validación Bootstrap + ClientID -->
     <script>
         function enviarFormulario() {

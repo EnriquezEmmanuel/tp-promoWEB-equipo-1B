@@ -11,44 +11,68 @@ namespace TP_Web_Promo_WEB
 {
     public partial class FormularioCliente : System.Web.UI.Page
     {
+        private Vaucher vaucherLocal = new Vaucher();
+        //private int articuloSesion;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                Vaucher vaucherInactivo = new Vaucher();
-                vaucherInactivo = (Vaucher)Session["Vaucher"];
-                txtDocumento.Text = "Se cargo el vaucher: " + vaucherInactivo.Codigo + " y el producto del vaucher: " + vaucherInactivo.IdArticulo; //datos numericos pasarlos con .ToString()
+                
             }
         }
 
 
         protected void btnParticipar_Click(object sender, EventArgs e)
         {
-          
+            ////////Hay que meter un try
             if (Page.IsValid)
             {
+
                 ClienteNegocio negocio = new ClienteNegocio();
                 var existente = negocio.buscarPorDNI(txtDocumento.Text);
 
 
-                if (existente != null)
+                if (existente == null)
                 {
-                    Response.Redirect("RegistroExitoso");
-                    return;
+                    cliente c = new cliente();
+
+                    c.Documento = txtDocumento.Text;
+                    c.Nombre = txtNombre.Text;
+                    c.Apellido = txtApellido.Text;
+                    c.Email = txtEmail.Text;
+                    c.Direccion = txtDireccion.Text;
+                    c.Ciudad = txtCiudad.Text;
+                    c.CodPostal = int.Parse(txtCodPostal.Text);
+
+                    negocio.agregar(c);
                 }
 
-                cliente c = new cliente();
 
-                c.Documento = txtDocumento.Text;
-                c.Nombre = txtNombre.Text;
-                c.Apellido = txtApellido.Text;
-                c.Email = txtEmail.Text;
-                c.Direccion = txtDireccion.Text;
-                c.Ciudad = txtCiudad.Text;
-                c.CodPostal = int.Parse(txtCodPostal.Text);
+                //-------------- carga del Vaucher -------------------
 
-                negocio.agregar(c);
-                Response.Redirect("RegistroExitoso");
+                vaucherLocal.FechaCanje = DateTime.Now;
+
+                ClienteNegocio clienteAgregado = new ClienteNegocio();
+
+                cliente clientePrueba = new cliente();
+                clientePrueba = clienteAgregado.buscarPorDNI(txtDocumento.Text);        //la busqueda es por si se agregó un nuevo cliente
+
+                VaucherNegocio VchrNegocio = new VaucherNegocio();
+
+                vaucherLocal = (Vaucher)Session["Vaucher"];
+
+                vaucherLocal.IdCliente = clientePrueba.Id;                              //obtenemos el Id del posible nuevo cliente
+
+                //string fechaCje = vaucherLocal.FechaCanje.ToString("yyyy/MM/dd"); // esto es para la BD, se hace en VaucherNegocio
+                //verificador.Text = vaucherLocal.Codigo + ", " + vaucherLocal.IdCliente + ", " + fechaCje + ", " + vaucherLocal.IdArticulo;
+
+                VchrNegocio.registrarVoucher(vaucherLocal);
+
+
+                Response.Redirect("RegistroExitoso.aspx?mensaje=¡Registo exitoso!",false);
+
+
+
             }
 
 
