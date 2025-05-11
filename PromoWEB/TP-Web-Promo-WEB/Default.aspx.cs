@@ -50,7 +50,7 @@ namespace TP_Web_Promo_WEB
                 Image1.Style["opacity"] = "0";
                 if (validacion == true) lblMensaje.Text = mensaje; else lblMensaje.Text = "Vaucher inexistente";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Image1.Style["opacity"] = "0";
                 lblMensaje.Text = "Hubo un error inesperado. Vuelva a intentar más tarde.";

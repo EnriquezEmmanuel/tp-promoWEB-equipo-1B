@@ -67,7 +67,7 @@
 
 
 
-    <%--  %><asp:Label Text="-- Sin cambios --" ID="verificador" runat="server" /> --%>
+      <asp:Label Text="" ID="lblMensaje" runat="server" /> 
 
     <!-- Script con validación Bootstrap + ClientID -->
     <script>
